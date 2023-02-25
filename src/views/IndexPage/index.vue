@@ -4,25 +4,18 @@ import { RouterLink } from "vue-router";
 <template>
   <div class="page">
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/lattice">01.九宫格</RouterLink>
-        <RouterLink to="/turntable">02.大转盘</RouterLink>
-      </nav>
+      <div class="content-left">
+        <nav>
+          抽奖类型：
+          <RouterLink to="/lattice">01.九宫格</RouterLink>
+          <RouterLink to="/turntable">02.大转盘</RouterLink>
+        </nav>
+      </div>
+      <div class="content-right">
+        代码地址:
+        <a href="https://github.com/hardingCheng/lucky_draw">github</a>
+      </div>
     </div>
-  </div>
-
-  <!-- 外层容器 -->
-  <div class="lucky-draw">
-    <!-- 中间标识线（表示中奖的物品） -->
-    <div class="lucky-draw-line"></div>
-    <!-- 奖品容器，后续通过设置 transition + translateX 值实现滚动效果 -->
-    <div class="lucky-draw-wrap">
-      <!-- 奖品xn，撑起奖品容器的宽度 -->
-      <div class="lucky-draw-item"></div>
-      ...
-    </div>
-    <!-- 展示抽奖结果 -->
-    <div class="lucky-draw-results"></div>
   </div>
 </template>
 
@@ -32,6 +25,18 @@ import { RouterLink } from "vue-router";
   display: flex;
   justify-content: center;
   align-items: center;
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    .content-left {
+      width: 50vw;
+    }
+    .content-right {
+      width: 50vw;
+    }
+  }
 }
 
 a,

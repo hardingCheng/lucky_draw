@@ -45,7 +45,7 @@ const onTurntable = () => {
     loop: 8,
     completed: () => {
       isAnimating.value = false;
-      // ElMessage.success("恭喜你，你获奖了！");
+      ElMessage.success("恭喜你，你获奖了！");
     },
   });
 };

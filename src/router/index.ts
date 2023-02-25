@@ -17,14 +17,6 @@ const router = createRouter({
       },
     },
     {
-      path: "/scrolls",
-      name: "scrolls",
-      component: () => import("@/views/Scrolls/index.vue"),
-      meta: {
-        title: "scrolls",
-      },
-    },
-    {
       path: "/turntable",
       name: "Turntable",
       component: () => import("@/views/Turntable/index.vue"),
