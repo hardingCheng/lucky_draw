@@ -1,42 +1,3 @@
-<script setup lang="ts">
-// -- imports
-import { ref } from "vue";
-import LuckyDraw from "@/utils/LuckyDraw";
-import PageBack from "@/components/PageBack/index.vue";
-import { ElMessage } from "element-plus";
-
-// -- refs
-const turntableRef = ref();
-const times = ref(1);
-const isAnimating = ref(false);
-
-// -- methods
-
-// -- events
-const onTurntable = () => {
-  if (!turntableRef.value || isAnimating.value) return;
-  if (times.value < 1) {
-    ElMessage.closeAll();
-    ElMessage.error("Uh-huh, there's no raffle！");
-    return;
-  }
-  isAnimating.value = true;
-  times.value--;
-  LuckyDraw.turntable({
-    wrap: turntableRef.value,
-    count: 8,
-    index: 3,
-    audioUriForStart: "/mp3s/case-one.mp3",
-    audioUriForEnd: "/mp3s/case-coin.mp3",
-    duration: 10,
-    loop: 8,
-    completed: () => {
-      isAnimating.value = false;
-      ElMessage.success("Congratulations on winning the lottery!");
-    },
-  });
-};
-</script>
 <template>
   <div class="page ff-DIN-Bold">
     <PageBack />
@@ -52,7 +13,43 @@ const onTurntable = () => {
     </div>
   </div>
 </template>
+<script setup lang="ts">
+// -- imports
+import { ref } from "vue";
+import PageBack from "@/components/PageBack/index.vue";
+import { ElMessage } from "element-plus";
+import TurntableHook from "@/utils/TurntableHook";
 
+// -- refs
+const turntableRef = ref();
+const times = ref(3);
+const isAnimating = ref(false);
+
+// -- methods
+
+// -- events
+const onTurntable = () => {
+  if (!turntableRef.value || isAnimating.value) return;
+  if (times.value < 1) {
+    ElMessage.closeAll();
+    ElMessage.error("出现错误了！");
+    return;
+  }
+  isAnimating.value = true;
+  times.value--;
+  TurntableHook.turntable({
+    wrap: turntableRef.value,
+    count: 8,
+    index: 3,
+    duration: 10,
+    loop: 8,
+    completed: () => {
+      isAnimating.value = false;
+      // ElMessage.success("恭喜你，你获奖了！");
+    },
+  });
+};
+</script>
 <style lang="less" scoped>
 .page {
   padding-top: 80px;
@@ -73,18 +70,18 @@ const onTurntable = () => {
   align-items: center;
 }
 .turntable-wrap {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   background: url("./images/dis.png") no-repeat center center;
   background-size: cover;
   position: relative;
   z-index: 1;
   .wheel {
-    width: 235px;
-    height: 235px;
+    width: 330px;
+    height: 330px;
     position: absolute;
     top: 30px;
-    left: 32px;
+    left: 34px;
   }
   .point {
     width: 70px;

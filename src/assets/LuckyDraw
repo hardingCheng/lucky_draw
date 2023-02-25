@@ -235,7 +235,7 @@ class LuckyDraw {
   static lattice(options: LatticeOptions) {
     // -- 解构
     const { elClass, winningIndex, completed, loop = 8 } = options;
-    // -- 获取元素
+    // -- 九宫格每个格子的元素获取元素
     const doms = document.querySelectorAll(`.${elClass}`);
     const len = doms.length;
     // -- 清空上一次抽奖时的状态

@@ -1,34 +1,9 @@
-<script setup lang="ts">
-// -- imports
-import { ref } from 'vue';
-import PageBack from '@/components/PageBack/index.vue';
-import { ElMessage } from 'element-plus';
-import LuckyDraw from '@/utils/LuckyDraw';
-
-// -- refs
-const isAnimating = ref(false);
-
-// -- events
-const onLattice = () => {
-  if (isAnimating.value) return;
-  isAnimating.value = true;
-  LuckyDraw.lattice({
-    elClass: 'lattice-item',
-    winningIndex: 5,
-    completed: () => {
-      isAnimating.value = false;
-      ElMessage.success('Congratulations on winning the lottery!');
-    },
-  });
-};
-</script>
-
 <template>
   <div class="page ff-DIN-Bold">
     <PageBack />
     <div class="lattice">
-      <!-- 抽奖背景 -->
-      <img width="300" src="./images/lattice_bg.png" />
+      <!-- 抽奖底层s背景 -->
+      <img width="500" height="500" src="./images/lattice_bg.png" />
       <!-- 外层容器 -->
       <div class="lattice-wrap">
         <div class="lattice-item"><img src="./images/goods_1.png" /></div>
@@ -40,7 +15,7 @@ const onLattice = () => {
         <div class="lattice-item"><img src="./images/goods_7.png" /></div>
         <div class="lattice-item"><img src="./images/goods_8.png" /></div>
       </div>
-      <!-- 抽奖按钮 -->
+      <!-- 点击抽奖按钮 -->
       <img
         class="start-button"
         src="./images/lattice_btn.png"
@@ -49,6 +24,30 @@ const onLattice = () => {
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import { ref } from "vue";
+import PageBack from "@/components/PageBack/index.vue";
+import { ElMessage } from "element-plus";
+import LatticeHook from "@/utils/LatticeHook";
+
+// -- refs
+const isAnimating = ref(false);
+
+// -- events
+const onLattice = () => {
+  if (isAnimating.value) return;
+  isAnimating.value = true;
+  LatticeHook.lattice({
+    elClass: "lattice-item",
+    // 这个地方可以换成洗牌算法
+    winningIndex: Math.floor(Math.random() * 9),
+    completed: () => {
+      isAnimating.value = false;
+      ElMessage.success("恭喜你，你获奖了！");
+    },
+  });
+};
+</script>
 
 <style lang="less" scoped>
 .page {
@@ -65,10 +64,10 @@ const onLattice = () => {
 .lattice {
   position: relative;
   .lattice-wrap {
-    width: 236px;
-    height: 186px;
+    width: 400px;
+    height: 255px;
     position: absolute;
-    top: 74px;
+    top: 97px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -79,8 +78,8 @@ const onLattice = () => {
     .place,
     .lattice-item {
       position: absolute;
-      width: 75px;
-      height: 59px;
+      width: 110px;
+      height: 80px;
       img {
         width: inherit;
         height: inherit;
@@ -122,7 +121,7 @@ const onLattice = () => {
         transform: translateY(-50%);
       }
       &.active::before {
-        content: '';
+        content: "";
         display: block;
         width: 100%;
         height: 100%;
@@ -143,10 +142,10 @@ const onLattice = () => {
     }
   }
   .start-button {
-    height: 50px;
+    height: 60px;
     position: absolute;
     left: 50%;
-    bottom: 48px;
+    bottom: 58px;
     transform: translateX(-50%);
     cursor: pointer;
   }

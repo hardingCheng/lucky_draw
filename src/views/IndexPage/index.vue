@@ -5,9 +5,8 @@ import { RouterLink } from "vue-router";
   <div class="page">
     <div class="wrapper">
       <nav>
-        <RouterLink to="/scrolls">01.滚动抽奖</RouterLink>
+        <RouterLink to="/lattice">01.九宫格</RouterLink>
         <RouterLink to="/turntable">02.大转盘</RouterLink>
-        <RouterLink to="/lattice">03.九宫格</RouterLink>
       </nav>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="page-back" @click="$router.back()">&lt; RETURN TO HOME PAGE</div>
+  <div class="page-back" @click="$router.back()">&lt; 返回到主页</div>
 </template>
 
 <style lang="less" scoped>
